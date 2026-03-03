@@ -101,8 +101,9 @@ const MapView = ({selectedSpot,spots=[]}) => {
                     <div class="text-xs text-slate-500">${selectedSpot.phone || '-'}</div>
                 </div>`
             )
+            infoRef.current.open(map, marker)
         }
-    },[])
+    },[ready, selectedSpot])
 
     return <div ref={mapRef} className='w-full h-full'/>
 }
