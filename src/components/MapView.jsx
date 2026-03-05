@@ -96,22 +96,35 @@ const MapView = ({ selectedSpot, spots = [] }) => {
         })
     }, [ready, spots])
 
-        useEffect(() => {
+    useEffect(() => {
         if (!ready ||!selectedSpot|| !mapInstanceRef.current || !window.kakao?.maps) return
 
         const map = mapInstanceRef.current
 
-        const {lat, lng}=selectedSpot
+        const { lat, lng } = selectedSpot
 
-        if(!lat ||!lng) return
+        if (!lat || !lng) return
 
-        const position = new window.kakao.maps.LatLng(Number(lat),Number(lng))
+        const position = new window.kakao.maps.LatLng(Number(lat), Number(lng))
         map.setCenter(position)
         map.setLevel(3)
 
-        
+        const marker = markersRef.current.find(
+            (m) => m.spot?.name === selectedSpot.name
+        )
 
-    }, [])
+
+        if (marker && infoRef.current) {
+            infoRef.current.setContent(
+                `<div class="p-2 min-w-[160px]">
+                    <div class="font-semibold text-sm">${selectedSpot.name}</div>
+                    <div class="text-xs text-slate-500 mt-1">${selectedSpot.detail || '-'}</div>
+                    <div class="text-xs text-slate-500">${selectedSpot.phone || '-'}</div>
+                </div>`
+            )
+            infoRef.current.open(map,marker)
+        }
+    }, [ready,selectedSpot])
 
     return <div ref={mapRef} className='w-full h-full' />
 }
