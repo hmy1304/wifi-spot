@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import wifiData from '../assets/wifi.json'
+
+import toiletData from '../assets/toilet.json'
 import MapView from '../components/MapView'
 import { useLocation } from 'react-router-dom'
 import { useFavoritesContext } from '../contexts/FavoritesContext'
@@ -21,9 +22,9 @@ const MapPage = () => {
   const filtered = useMemo(() => {
     const keyword = q.trim()
 
-    if (!keyword) return wifiData.slice(0, 50)
+    if (!keyword) return toiletData.slice(0, 50)
 
-    return wifiData
+    return toiletData
       .filter((x) =>
         (x.name + " " + x.detail)
           .toLowerCase()
@@ -58,7 +59,7 @@ const MapPage = () => {
       >
         <div className='flex items-center justify-between border-b px-4 py-3'>
           <h1 className='text-base font-semibold'>Map</h1>
-          <p className='text-xs text-slate-500'>내 주변 공공 와이파이</p>
+          <p className='text-xs text-slate-500'>내 주변 공공 화장실</p>
         </div>
         {/* map 들어갈 자리 */}
         <div className='h-[70vh]'>
@@ -76,9 +77,9 @@ const MapPage = () => {
       {/* 리스트 필터 영역 */}
       <aside className='border rounded-2xl bg-white shadow-sm'>
         <div className='border-b px-4 py-3'>
-          <h2 className='text-base font-semibold'>Wifi Spot</h2>
+          <h2 className='text-base font-semibold'>toilet Spot</h2>
           <p className='mt-1 text-xs text-slate-500'>
-            데이터: {wifiData.length}건 / 표시: {filtered.length}건</p>
+            데이터: {toiletData.length}건 / 표시: {filtered.length}건</p>
         </div>
         <div className='flex gap-2 border-b px-4 py-3'>
           <input
