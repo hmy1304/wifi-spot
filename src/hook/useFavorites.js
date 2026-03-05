@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
 
-const STORAGE_KEY = 'parking-spot-favorites'
+const STORAGE_KEY = 'toilet-spot-favorites'
 
 
 const getStoredFavorites = () => {
